@@ -1,7 +1,7 @@
 #BFD #backtrack #2^n 
 
 # Summary
-Backtrack, 列出所有解 （DP 解的个数）
+Backtrack, 求排列组合所有方案 （DP 解的个数）
 start+1 不重复元素
 
 
@@ -55,7 +55,7 @@ def combinationSum(candidates, target):
 ```
 
 # Leetcode
-https://leetcode.cn/problems/combination-sum/description/
-https://leetcode.cn/problems/combination-sum-ii/description/
-https://leetcode.cn/problems/combination-sum-iii/description/
-https://leetcode.cn/problems/combination-sum-iv/  只要求解的个数(DP)
+- https://leetcode.cn/problems/combination-sum/description/
+- https://leetcode.cn/problems/combination-sum-ii/description/
+- https://leetcode.cn/problems/combination-sum-iii/description/
+- https://leetcode.cn/problems/combination-sum-iv/  只要求解的个数(DP)
