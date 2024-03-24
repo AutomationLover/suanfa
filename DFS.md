@@ -90,6 +90,63 @@ class Solution:
 
 ```
 
+```python
+
+
+def numIslands(grid):
+    if not grid:
+        return 0
+    if not grid[0]:
+        return 0
+    max_row = len(grid)
+    max_col = len(grid[0])
+    water = '0'
+    land = '1'
+    def is_out_of_grid(i, j):
+        if i < 0 or j<0:
+            return True
+        if i >= max_row or j>=max_col:
+            return True
+        return False
+
+    def dfs(i, j):
+        if is_out_of_grid(i,j) or grid[i][j]==water:
+            return
+        grid[i][j] = water
+        dfs(i+1, j)
+        dfs(i-1,j)
+        dfs(i,j+1)
+        dfs(i,j-1)
+
+    result = 0
+    for i in range(max_row):
+        for j in range(max_col):
+            if grid[i][j] == land:
+                result += 1
+                dfs(i,j)
+    return result
+
+def test():
+    # Example 1
+    grid1 = [
+        ["1","1","1","1","0"],
+        ["1","1","0","1","0"],
+        ["1","1","0","0","0"],
+        ["0","0","0","0","0"]
+    ]
+    #print(numIslands(grid1))  # Output: 1
+
+    # Example 2
+    grid2 = [
+        ["1","1","0","0","0"],
+        ["1","1","0","0","0"],
+        ["0","0","1","0","0"],
+        ["0","0","0","1","1"]
+    ]
+    print(numIslands(grid2))  # Output: 3
+    
+```
+
 # Leetcode
 - https://leetcode.cn/problems/combination-sum/description/
 - https://leetcode.cn/problems/combination-sum-ii/description/
