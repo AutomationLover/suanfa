@@ -57,3 +57,78 @@ def test():
 
 
 ```
+
+```python
+
+class UnionFind:
+    def __init__(self, n):
+        self.root = [i for i in range(n)]
+        self.size = [1] * n
+        self.part = n
+
+    def find(self, x):
+        if x != self.root[x]:
+            root_x = self.find(self.root[x])
+            self.root[x] = root_x
+            return root_x
+        return x
+
+    def union(self, x, y):
+        root_x = self.find(x)
+        root_y = self.find(y)
+        if root_x == root_y:
+            return
+        if self.size[root_x] >= self.size[root_y]:
+            root_x, root_y = root_y, root_x
+        self.root[root_x] = root_y
+        self.size[root_y] += self.size[root_x]
+        self.size[root_x] = 0
+        self.part -= 1
+        return
+
+    def get_root_part(self):
+        part = defaultdict(list)
+        for i in range(len(self.root)):
+            part[self.find(i)].append(i)
+        return part
+
+
+class Solution:
+    def generateSentences(self, synonyms: List[List[str]], text: str) -> List[str]:
+        words = []
+        for lst in synonyms:
+            words.extend(lst)
+        words = list(set(words))
+        ind = {word: i for i, word in enumerate(words)}
+        n = len(ind)
+
+        uf = UnionFind(n)
+        for a, b in synonyms:
+            uf.union(ind[a], ind[b])
+        part = uf.get_root_part()
+        for k in part:
+            part[k].sort(key=lambda x: words[x])
+            
+        def dfs(i):
+            if i == m:
+                ans.append(" ".join(pre))
+                return
+            if lst[i] not in ind:
+                pre.append(lst[i])
+                dfs(i + 1)
+                pre.pop()
+            else:
+                for j in part[uf.find(ind[lst[i]])]:
+                    pre.append(words[j])
+                    dfs(i + 1)
+                    pre.pop()
+            return
+
+        lst = text.split(" ")
+        m = len(lst)
+        ans = []
+        pre = []
+        dfs(0)
+        return ans
+        
+```
