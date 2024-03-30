@@ -52,3 +52,35 @@ def binary_search_right_most(arr, target):
 
 
 ## examples
+```python
+def findMedianSortedArrays(shortNums, longNums):
+    if len(shortNums) > len(longNums):
+        shortNums, longNums = longNums, shortNums
+
+    x, y = len(shortNums), len(longNums)
+    start = 0
+    end = x
+    while start <= end:
+        partitionX = (start + end) // 2
+        partitionY = (x + y + 1) // 2 - partitionX
+
+        maxLeftX = float('-inf') if partitionX == 0 else shortNums[partitionX - 1]
+        minRightX = float('inf') if partitionX == x else shortNums[partitionX]
+
+        maxLeftY = float('-inf') if partitionY == 0 else longNums[partitionY - 1]
+        minRightY = float('inf') if partitionY == y else longNums[partitionY]
+
+        if maxLeftX <= minRightY and maxLeftY <= minRightX:
+            if (x + y) % 2 == 0:
+                return (max(maxLeftX, maxLeftY) + min(minRightX, minRightY)) / 2.0
+            else:
+                return max(maxLeftX, maxLeftY)
+
+        elif maxLeftX > minRightY:
+            end = partitionX - 1
+        else:
+            start = partitionX + 1
+
+    raise Exception("Input arrays are not sorted")
+
+```
