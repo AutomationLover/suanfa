@@ -73,7 +73,10 @@ class Solution:
                 res += 1
             if x1 == n - 1 and y1 == m - 1 and x2 == n - 1 and y2 == m - 1: # 搜索的终止条件
                 return res
-            res += max(dfs(x1 + 1, y1, x2 + 1, y2), dfs(x1 + 1, y1, x2, y2 + 1), dfs(x1, y1 + 1, x2 + 1, y2), dfs(x1, y1 + 1, x2, y2 + 1))
+            res += max(dfs(x1 + 1, y1, x2 + 1, y2),
+                      dfs(x1 + 1, y1, x2, y2 + 1),
+                      dfs(x1, y1 + 1, x2 + 1, y2),
+                      dfs(x1, y1 + 1, x2, y2 + 1))
             return res
             
         return max(dfs(0, 0, 0, 0), 0) # 如果只能走到障碍上或越界那就会返回负无穷，所以要跟0取max
